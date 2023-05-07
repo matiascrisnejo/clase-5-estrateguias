@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var carrerasRouter = require('./routes/carreras');
-
+var materiasRouter = require('./routes/materias');//materia
 
 var app = express();
 
@@ -25,6 +25,12 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+app.use('/mat', materiasRouter);                //materia
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -35,5 +41,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
